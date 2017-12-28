@@ -141,8 +141,7 @@ exports.addEntry = function(req, res, next) {
         exclude_column_names: true,
         // Notice the YYYY-MM-DD format 
         start_date: "2017-11-30",
-        end_date: "2017-12-28",
-        column_index: 4
+        end_date: "2017-12-28"
       }, function(err, response){
           if(err)
               throw err;
@@ -152,34 +151,14 @@ exports.addEntry = function(req, res, next) {
               data: JSON.parse(response)
           });
       });
-    /*let rosebud = await fetchQ(req.body);
-    return res.json({
-       data: rosebud
-    });*/
+   
 };
 
-async function fetchQ(data) {
-    quandl.dataset({
-        source: "WIKI",
-        table: data.stock
-      }, {
-        order: "asc",
-        exclude_column_names: true,
-        // Notice the YYYY-MM-DD format 
-        start_date: "2017-11-30",
-        end_date: "2017-12-28",
-        column_index: 4
-      }, function(err, response){
-          if(err)
-              throw err;
-       
-          console.log(response);
-          return response;
-      });
+
 
 
     
-}
+
 var quandl = new Quandl({
     auth_token: 'RHAbp4b2msadmufSJuzn',
     api_version: 3

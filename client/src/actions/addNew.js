@@ -32,6 +32,13 @@ export const fetchQ = (stock) => (dispatch, getState) => {
         .then(({data}) => {
             //dispatch(fetchProtectedDataSuccess(data))
             console.log(data)
+            let stockData = data.dataset.data;
+            let closingArr = [];
+            stockData.map(function(json) {
+                closingArr.push({date: json[0], close: json[4]});
+            })
+            dispatch(fetchQuandylSuccess(closingArr, data.dataset.name))
+            console.log(closingArr, data.dataset.name)
         })
         .catch(err => {
             //dispatch(fetchProtectedDataError(err));
