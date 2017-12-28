@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { add } from '../actions/auth';
 import { testFetch } from '../actions/protected-data';
-import { sendEntry, fetchQuandyl } from '../actions/addNew';
+import { fetchQ, fetchQuandyl } from '../actions/addNew';
 import { SimpleLineChart } from "./chart"
 // import {required, nonEmpty} from '../validators';
 
@@ -22,7 +22,7 @@ export class Add extends React.Component {
             
         };
         console.log(submission);
-        return this.props.dispatch(sendEntry(submission));
+        return this.props.dispatch(fetchQ(submission));
     }
 
     render() {
@@ -41,6 +41,7 @@ export class Add extends React.Component {
 
         return (
             <div>
+
             <form
                 className="login-form"
                 onSubmit={this.props.handleSubmit(values =>
@@ -52,7 +53,7 @@ export class Add extends React.Component {
                 <p>Welcome back, {this.props.email}</p>
 
                 
-                  <label htmlFor="stock">Stock</label>
+                  <label htmlFor="stock">Stock: </label>
                   <br />
                     <Field name="stock" component="textarea" type="textarea" />
                 <br />
@@ -61,6 +62,7 @@ export class Add extends React.Component {
                 </button>
                 
             </form>
+            <h4>Name: {this.props.name}</h4>
             <SimpleLineChart chartData = {this.props.chart}/>
             </div>
         );
@@ -73,7 +75,8 @@ const mapStateToProps = state => {
     return {
         loggedIn: currentUser !== null,
         email: currentUser ? state.auth.currentUser.email : '',
-        chart: state.chart.data
+        chart: state.chart.data,
+        name: state.chart.name
     };
 };
 
@@ -85,9 +88,3 @@ export default reduxForm({
     form: 'add',
     onSubmitFail: (errors, dispatch) => dispatch(focus('add', 'email'))
 })(Add);
-
-
-
-
-
-
