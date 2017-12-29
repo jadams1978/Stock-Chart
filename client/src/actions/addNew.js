@@ -44,7 +44,7 @@ export const fetchQ = (stock) => (dispatch, getState) => {
             //dispatch(fetchProtectedDataError(err));
         });
 }
-export const fetchQuandyl = (data) => (dispatch, getState) => {
+/*export const fetchQuandyl = (data) => (dispatch, getState) => {
     
     console.log(data);
     let year = 2017;
@@ -64,7 +64,7 @@ export const fetchQuandyl = (data) => (dispatch, getState) => {
         headers: {
             // Provide our auth token as credentials
             
-            'Accept': 'application/json, text/plain, */*',
+            
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
@@ -90,4 +90,4 @@ export const fetchQuandyl = (data) => (dispatch, getState) => {
         console.log(err);
         //dispatch(fetchProtectedDataError(err));
     });
-}})}
+}})}*/

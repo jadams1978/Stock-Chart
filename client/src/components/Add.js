@@ -4,15 +4,16 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { add } from '../actions/auth';
 import { testFetch } from '../actions/protected-data';
-import { fetchQ, fetchQuandyl } from '../actions/addNew';
-import { SimpleLineChart } from "./chart"
+import { fetchQ } from '../actions/addNew';
+import { SimpleLineChart } from "./chart";
+import { getStocks } from '../actions/getStocks'
 // import {required, nonEmpty} from '../validators';
 
 export class Add extends React.Component {
 
     componentDidMount() {
         console.log(this);
-        this.props.dispatch(fetchQuandyl());
+        this.props.dispatch(getStocks());
     }
 
 
@@ -60,7 +61,11 @@ export class Add extends React.Component {
                 <button disabled={this.props.pristine || this.props.submitting}>
                     Submit
                 </button>
-                
+                <ul>
+                {this.props.stocks.map((item, i) => (
+                    <li key={i}>{item.stock}</li>  
+                ))}
+                </ul>  
             </form>
             <h4>Name: {this.props.name}</h4>
             <SimpleLineChart chartData = {this.props.chart}/>
@@ -76,7 +81,8 @@ const mapStateToProps = state => {
         loggedIn: currentUser !== null,
         email: currentUser ? state.auth.currentUser.email : '',
         chart: state.chart.data,
-        name: state.chart.name
+        name: state.chart.name,
+        stocks: state.chart.stocks
     };
 };
 

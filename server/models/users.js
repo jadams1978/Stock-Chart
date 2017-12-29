@@ -11,7 +11,9 @@ const UserSchema = mongoose.Schema({
     email: {
         type: String,
         required: true
-    }
+    },
+    stocks: Array
+
 });
 
 UserSchema.methods.apiRepr = function() {

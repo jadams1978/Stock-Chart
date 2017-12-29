@@ -12,6 +12,7 @@ const jsonParser = bodyParser.json();
 const EntryController = require('./entries');
 const UsersController = require('./users');
 const AuthController = require('./auth');
+const StocksController = require('./stocks');
 
 //Register User
 router.post('/register', jsonParser, UsersController.register);
@@ -23,6 +24,8 @@ router.post('/login', passport.authenticate('basic', {session: false}), AuthCont
 router.post('/refresh', passport.authenticate('jwt', {session: false}), AuthController.refresh);
 
 //Add Entry
-router.post('/add', [passport.authenticate('jwt', {session: false}), jsonParser],UsersController.addEntry);
+router.post('/add', [passport.authenticate('jwt', {session: false}), jsonParser],StocksController.addStock);
+router.get('/add', [passport.authenticate('jwt', {session: false}), jsonParser],StocksController.findStocks);
+
 
 module.exports = {router, basicStrategy, jwtStrategy};
